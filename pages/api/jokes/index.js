@@ -8,4 +8,10 @@ export default async function handler(request, response) {
     const jokes = await Joke.find();
     return response.status(200).json(jokes);
   }
+
+  if (request.method === "POST") {
+    const jokeData = request.body;
+    await Joke.create(jokeData);
+    return response.status(200).json({ message: "Joke created!" });
+  }
 }
